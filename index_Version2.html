@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101522">
+  <meta name="description" content="Um trabalho escolar sobre fraude académica e cópia nos testes: causas, consequências e formas de prevenção.">
+  <title>Fraude académica e cópia nos testes</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101522;
+      --surface: #181f2e;
+      --surface-light: #202a3b;
+      --text: #f4f6fb;
+      --muted: #b6bfd0;
+      --accent: #ff6b5f;
+      --accent-light: #ff9389;
+      --line: rgba(255,255,255,.12);
+      --radius: 18px;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid #ffd166;
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(16, 21, 34, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-wrap {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #201314;
+      font-size: 20px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    nav a {
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    nav a:hover, nav a:focus-visible {
+      background: var(--surface-light);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 500px;
+      align-items: center;
+      margin: 28px auto 68px;
+      padding: clamp(30px, 7vw, 76px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        linear-gradient(90deg, rgba(10,14,22,.95) 0%, rgba(10,14,22,.78) 55%, rgba(10,14,22,.25) 100%),
+        url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1800&q=85") center 48% / cover,
+        #293348;
+    }
+
+    .hero-content {
+      max-width: 660px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: var(--accent-light);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1 {
+      max-width: 700px;
+      margin-bottom: 18px;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+    }
+
+    h1 span {
+      color: var(--accent-light);
+    }
+
+    .hero p {
+      max-width: 590px;
+      margin-bottom: 28px;
+      color: #e1e5ed;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #211211;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--accent-light);
+    }
+
+    .button.secondary {
+      border-color: rgba(255,255,255,.5);
+      background: transparent;
+      color: var(--text);
+    }
+
+    .button.secondary:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    section {
+      padding-block: 34px;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      line-height: 1.15;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      height: 100%;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .card-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 16px;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255,107,95,.13);
+      font-size: 22px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .intro-box {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(22px, 4vw, 36px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--surface), #202b40);
+    }
+
+    .intro-box p {
+      color: var(--muted);
+    }
+
+    .quote {
+      padding: 20px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 400;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-light);
+      color: #e2e7f0;
+      font-size: .85rem;
+    }
+
+    .recommendations {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .recommendation {
+      display: flex;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .recommendation .check {
+      color: var(--accent-light);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .recommendation p {
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .gallery button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: zoom-in;
+      text-align: left;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+
+    .gallery button:hover img {
+      transform: scale(1.04);
+    }
+
+    .gallery figcaption {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 22px;
+    }
+
+    .contact-card {
+      padding: clamp(22px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .contact-card > p {
+      margin-bottom: 20px;
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 700;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .form-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .info-item {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .info-item a {
+      color: var(--accent-light);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .conclusion {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid rgba(255,107,95,.3);
+      border-radius: var(--radius);
+      background: rgba(255,107,95,.08);
+      text-align: center;
+    }
+
+    .conclusion p {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .88rem;
+      text-align: center;
+    }
+
+    dialog {
+      width: min(900px, calc(100% - 28px));
+      max-height: 90vh;
+      margin: auto;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #101522;
+      color: var(--text);
+    }
+
+    dialog::backdrop {
+      background: rgba(0,0,0,.82);
+    }
+
+    dialog img {
+      max-height: 76vh;
+      width: 100%;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .dialog-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 4px 12px;
+    }
+
+    .dialog-top button {
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-light);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+        padding-block: 10px;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav a {
+        padding: 8px 11px;
+      }
+
+      .hero {
+        min-height: 430px;
+        margin-top: 18px;
+        background-position: 58% center;
+      }
+
+      .grid, .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .intro-box, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 24px, var(--max-width));
+      }
+
+      .hero {
+        min-height: 470px;
+        padding: 26px 20px;
+        background-image:
+          linear-gradient(90deg, rgba(10,14,22,.91), rgba(10,14,22,.62)),
+          url("https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80");
+      }
+
+      .grid, .gallery, .recommendations {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery img {
+        height: 230px;
+      }
+
+      section {
+        padding-block: 26px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Fraude académica — página inicial">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        <span>Aprender com honestidade</span>
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#tema">O tema</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">Trabalho de grupo</span>
+        <h1>Fraude académica e <span>cópia nos testes</span></h1>
+        <p>
+          Porque é que alguns alunos copiam, que consequências isso tem
+          e como podemos construir uma cultura de honestidade na escola?
+        </p>
+        <div class="button-row">
+          <a class="button" href="#tema">Explorar o trabalho</a>
+          <a class="button secondary" href="#galeria">Ver a galeria</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="tema">
+      <div class="section-heading">
+        <span class="eyebrow">Compreender o problema</span>
+        <h2>O que é fraude académica?</h2>
+        <p>
+          É qualquer acto desonesto praticado para obter vantagem numa
+          avaliação ou num trabalho escolar.
+        </p>
+      </div>
+
+      <div class="intro-box">
+        <p>
+          Copiar as respostas de um colega é uma das formas mais conhecidas,
+          mas não é a única. Usar cábulas ou o telemóvel escondido, deixar
+          outra pessoa copiar e entregar um trabalho feito por alguém também
+          são exemplos de fraude académica. Este trabalho procura compreender
+          o problema — não acusar ninguém — e apresentar formas de o prevenir.
+        </p>
+        <div class="quote">
+          Uma avaliação deve mostrar o que aprendemos, não apenas a nota que
+          conseguimos.
+          <small>Ideia central do trabalho</small>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="eyebrow">Objectivos</span>
+        <h2>O que queremos alcançar</h2>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🎯</div>
+          <h3>Compreender</h3>
+          <p>Identificar o que é a fraude académica e perceber algumas razões que levam os alunos a copiar.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🔍</div>
+          <h3>Analisar</h3>
+          <p>Reflectir sobre as consequências para o aluno, os colegas, a turma e a escola.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">🛡️</div>
+          <h3>Prevenir</h3>
+          <p>Apresentar medidas práticas para alunos, professores, famílias e direcção da escola.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <span class="eyebrow">Desenvolvimento</span>
+        <h2>Causas e consequências</h2>
+        <p>Há diferentes motivos para copiar, mas a fraude pode prejudicar a aprendizagem de todos.</p>
+      </div>
+
+      <div class="pill-list" aria-label="Temas abordados">
+        <span class="pill">Causas</span>
+        <span class="pill">Consequências</span>
+        <span class="pill">Honestidade</span>
+        <span class="pill">Vida escolar</span>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">❓</div>
+          <h3>Porque é que os alunos copiam?</h3>
+          <p>Medo de reprovar, falta de preparação, pressão da família ou dos colegas e a ideia de que não haverá consequências.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">📉</div>
+          <h3>O que pode acontecer?</h3>
+          <p>Quem copia pode não aprender a matéria, perder confiança nas próprias capacidades e ter dificuldades nos anos seguintes.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">⚖️</div>
+          <h3>Como afecta os outros?</h3>
+          <p>A cópia é injusta para quem estudou e pode diminuir a confiança nas avaliações e na escola.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="solucoes">
+      <div class="section-heading">
+        <span class="eyebrow">Prevenção</span>
+        <h2>O que podemos fazer?</h2>
+        <p>A prevenção funciona melhor quando todos colaboram e as regras são claras e justas.</p>
+      </div>
+
+      <div class="recommendations">
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Alunos</h3><p>Estudar com antecedência, pedir ajuda quando necessário e apoiar os colegas a aprender, não a copiar.</p></div>
+        </article>
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Professores</h3><p>Explicar as regras, diversificar as avaliações e acompanhar os alunos com dificuldades.</p></div>
+        </article>
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Famílias</h3><p>Acompanhar o estudo em casa e valorizar o esforço e a aprendizagem, não apenas as notas.</p></div>
+        </article>
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Direcção da escola</h3><p>Manter um regulamento claro, aplicar medidas proporcionais e promover conversas sobre honestidade.</p></div>
+        </article>
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Organização das provas</h3><p>Preparar provas com clareza, organizar a sala e fiscalizar todos os alunos com justiça.</p></div>
+        </article>
+        <article class="recommendation">
+          <span class="check" aria-hidden="true">✓</span>
+          <div><h3>Apoio à aprendizagem</h3><p>Criar grupos de estudo, tutorias e oportunidades para esclarecer dúvidas antes das avaliações.</p></div>
+        </article>
+      </div>
+
+      <div class="conclusion">
+        <p>Uma nota conquistada com esforço vale mais do que uma nota conseguida a copiar.</p>
+      </div>
+    </section>
+
+    <section id="galeria">
+      <div class="section-heading">
+        <span class="eyebrow">Imagens ilustrativas</span>
+        <h2>Galeria do projecto</h2>
+        <p>Seleccione uma fotografia para a ampliar. Substitua estas imagens por fotografias próprias do trabalho do grupo.</p>
+      </div>
+
+      <div class="gallery">
+        <figure>
+          <button type="button" data-image="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1400&q=85" data-alt="Alunos numa sala de aula" aria-label="Ampliar fotografia: alunos numa sala de aula">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="Alunos numa sala de aula" loading="lazy">
+            <figcaption>Aprendizagem e participação na sala de aula.</figcaption>
+          </button>
+        </figure>
+        <figure>
+          <button type="button" data-image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=85" data-alt="Estudantes a trabalhar em conjunto" aria-label="Ampliar fotografia: estudantes a trabalhar em conjunto">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Estudantes a trabalhar em conjunto" loading="lazy">
+            <figcaption>Estudar em grupo é uma forma de apoiar os colegas.</figcaption>
+          </button>
+        </figure>
+        <figure>
+          <button type="button" data-image="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=85" data-alt="Caderno e materiais de estudo" aria-label="Ampliar fotografia: caderno e materiais de estudo">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=700&q=80" alt="Caderno e materiais de estudo" loading="lazy">
+            <figcaption>Preparação e organização do estudo.</figcaption>
+          </button>
+        </figure>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <span class="eyebrow">Fale connosco</span>
+          <h2>Contacto</h2>
+          <p>Envie uma pergunta, opinião ou sugestão ao grupo.</p>
+
+          <form id="contact-form">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required>
+
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" required></textarea>
+
+            <button class="button" type="submit">Preparar mensagem</button>
+            <p class="form-note">O botão abrirá o programa de e-mail do seu dispositivo. A página não guarda as mensagens.</p>
+          </form>
+        </div>
+
+        <aside class="contact-card contact-info" aria-label="Informações de contacto">
+          <div>
+            <span class="eyebrow">Informações</span>
+            <h2>Estamos disponíveis</h2>
+          </div>
+          <div class="info-item">
+            <strong>Professor orientador</strong>
+            <span>Lázaro</span>
+          </div>
+          <div class="info-item">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/258877342528">+258 87 734 2528</a>
+          </div>
+          <div class="info-item">
+            <strong>E-mail</strong>
+            <a href="mailto:gercioduvane86@gmail.com">gercioduvane86@gmail.com</a>
+          </div>
+          <a class="button secondary" href="https://wa.me/258877342528">Contactar pelo WhatsApp</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Trabalho de grupo sobre <em>Fraude académica e cópia nos testes.</em>
+    </div>
+  </footer>
+
+  <dialog id="image-dialog" aria-label="Fotografia ampliada">
+    <div class="dialog-top">
+      <span id="dialog-caption">Fotografia ampliada</span>
+      <button type="button" id="close-dialog" aria-label="Fechar fotografia">Fechar ✕</button>
+    </div>
+    <img id="dialog-image" src="" alt="">
+  </dialog>
+
+  <script>
+    const imageDialog = document.getElementById("image-dialog");
+    const dialogImage = document.getElementById("dialog-image");
+    const dialogCaption = document.getElementById("dialog-caption");
+
+    document.querySelectorAll(".gallery button").forEach((button) => {
+      button.addEventListener("click", () => {
+        dialogImage.src = button.dataset.image;
+        dialogImage.alt = button.dataset.alt;
+        dialogCaption.textContent = button.dataset.alt;
+        imageDialog.showModal();
+      });
+    });
+
+    document.getElementById("close-dialog").addEventListener("click", () => {
+      imageDialog.close();
+    });
+
+    imageDialog.addEventListener("click", (event) => {
+      if (event.target === imageDialog) {
+        imageDialog.close();
+      }
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mensagem = document.getElementById("mensagem").value.trim();
+
+      const assunto = encodeURIComponent("Mensagem sobre o trabalho escolar");
+      const corpo = encodeURIComponent(
+        `Nome: ${nome}\nE-mail: ${email}\n\nMensagem:\n${mensagem}`
+      );
+
+      window.location.href =
+        `mailto:gercioduvane86@gmail.com?subject=${assunto}&body=${corpo}`;
+    });
+  </script>
+</body>
+</html>
